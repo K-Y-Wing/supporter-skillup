@@ -168,7 +168,7 @@ h1{font-size:18px;font-weight:500;margin-bottom:4px;}
   <p class="screen-title" id="skills-type-label"></p>
   <div class="tab-row" id="tabs"></div>
   <div id="panels"></div>
-  <button class="back-btn" onclick="showResult()">← 診断結果に戻る</button>
+  <button class="back-btn" onclick="backToResult()">← 診断結果に戻る</button>
 </div>
 
 <script>
@@ -387,7 +387,7 @@ function showSkillList(){
   window.scrollTo(0,0);
 }
 
-function showResult(){
+function backToResult(){
   document.getElementById('screen-skills').classList.remove('active');
   document.getElementById('screen-result').classList.add('active');
   window.scrollTo(0,0);
