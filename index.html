@@ -30,16 +30,35 @@ h1{font-size:18px;font-weight:500;margin-bottom:4px;}
 .result-section{font-size:11px;font-weight:500;color:#73726c;letter-spacing:0.04em;margin:14px 0 4px;}
 .result-text{font-size:13px;color:#3d3d3a;line-height:1.7;}
 .bar-wrap{margin:14px 0;}
+.snapshot-box{background:#f0f4ff;border:0.5px solid #7F77DD;border-radius:8px;padding:10px 14px;margin:14px 0;}
+.snapshot-title{font-size:11px;font-weight:500;color:#534AB7;margin-bottom:4px;}
+.snapshot-text{font-size:12px;color:#5f5e5a;line-height:1.7;}
+.hybrid-box{background:#fff8e6;border:0.5px solid #EF9F27;border-radius:8px;padding:10px 14px;margin:10px 0;}
+.hybrid-title{font-size:11px;font-weight:500;color:#854F0B;margin-bottom:4px;}
+.hybrid-text{font-size:12px;color:#5f5e5a;line-height:1.7;}
+.bar-label-row{display:flex;justify-content:space-between;margin-bottom:2px;}
+.bar-section-title{font-size:11px;font-weight:500;color:#73726c;margin:10px 0 6px;}
+
 .bar-row{display:flex;align-items:center;gap:8px;margin-bottom:6px;}
-.bar-lbl{font-size:11px;color:#73726c;width:72px;flex-shrink:0;}
-.bar-track{flex:1;height:6px;background:#f5f4f0;border-radius:3px;overflow:hidden;}
-.bar-fill{height:100%;border-radius:3px;}
+.bar-lbl{font-size:12px;color:#5f5e5a;width:80px;flex-shrink:0;font-weight:500;}
+.bar-track{flex:1;height:10px;background:#f0efe8;border-radius:5px;overflow:hidden;}
+.bar-fill{height:100%;border-radius:5px;}
 .fawn-box{background:#fdf6ee;border:0.5px solid #EF9F27;border-radius:10px;padding:14px 16px;margin-top:14px;}
 .fawn-title{font-size:12px;font-weight:500;color:#633806;margin-bottom:6px;}
 .fawn-text{font-size:13px;color:#5f5e5a;line-height:1.7;}
 .fawn-extra{font-size:13px;color:#5f5e5a;line-height:1.7;margin-top:8px;padding-top:8px;border-top:0.5px solid #EF9F27;}
 .next-btn{width:100%;padding:12px;font-size:15px;font-weight:500;margin-top:6px;cursor:pointer;border-radius:10px;border:none;background:#1a1a18;color:#fff;}
 .retry-btn{width:100%;padding:10px;font-size:13px;margin-top:8px;cursor:pointer;border-radius:10px;border:0.5px solid #b0aea6;background:#fff;color:#5f5e5a;}
+.send-box{background:#f0faf5;border:1px solid #1D9E75;border-radius:10px;padding:14px 16px;margin-top:10px;}
+.send-title{font-size:12px;font-weight:500;color:#085041;margin-bottom:6px;}
+.send-input{width:100%;padding:8px 10px;font-size:14px;border:0.5px solid #b0aea6;border-radius:8px;margin-bottom:8px;font-family:inherit;}
+.send-btn{width:100%;padding:11px;font-size:14px;font-weight:500;cursor:pointer;border-radius:10px;border:none;background:#1D9E75;color:#fff;}
+.send-btn:active{opacity:0.85;}
+.send-btn.sending{background:#b0aea6;}
+.send-result{font-size:12px;margin-top:8px;text-align:center;padding:6px;border-radius:6px;}
+.send-result.ok{background:#e1f5ee;color:#085041;}
+.send-result.ng{background:#fde8e8;color:#9B1C1C;}
+
 .tab-row{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:14px;}
 .tab-btn{font-size:12px;padding:6px 11px;border-radius:8px;border:0.5px solid #b0aea6;background:#fff;color:#5f5e5a;cursor:pointer;white-space:nowrap;}
 .tab-btn.active{background:#1a1a18;color:#fff;border-color:#1a1a18;}
@@ -133,6 +152,14 @@ h1{font-size:18px;font-weight:500;margin-bottom:4px;}
   <div class="header"><h1>サポーター自己発見シート　診断結果</h1><p class="subtitle">あなたの教え方タイプが見つかりました</p></div>
   <div id="result-content"></div>
   <button class="next-btn" onclick="showSkillList()">スキルアップリストを見る →</button>
+
+  <div class="send-box">
+    <p class="send-title">📤 診断結果をWingに送信する</p>
+    <input class="send-input" id="sender-name" type="text" placeholder="お名前を入力してください" maxlength="20">
+    <button class="send-btn" id="send-btn" onclick="sendResult()">結果を送信する</button>
+    <div class="send-result" id="send-result" style="display:none;"></div>
+  </div>
+
   <button class="retry-btn" onclick="retryDiagnosis()">もう一度診断する</button>
 </div>
 
@@ -169,6 +196,7 @@ var skillsData={
   "マイペース型×言語優位":{order:["スマホ機能","対人スキル","教えるスキル"],skills:{"スマホ機能":[{n:"設定・セキュリティ系の知識を深める",h:"パスワード管理・二段階認証・Wi-Fi設定など、受講生からよく聞かれる設定系を自分で整理する"},{n:"機種別の違いを一覧表にまとめる",h:"Android/iPhoneの操作の違いを自分でまとめた一覧表を作り、教室で使えるようにする"},{n:"メモ・スケジュールアプリを使いこなす",h:"カレンダー・メモ帳・リマインダーの連携を自分で使い込んで整理する"}],"対人スキル":[{n:"「間」を強みとして使う",h:"じっくり考えてから話す自分のスタイルを「丁寧さ」として受講生に伝わるよう意識する"},{n:"言葉で関係を育てる",h:"毎回教室の最初に「前回のあれ、うまくいきましたか？」と前回の話を一言拾う"}],"教えるスキル":[{n:"自作ハンドアウトを1枚作る",h:"よく教える操作を自分の言葉で書いた手順書を1枚作り、受講生に渡せるようにする"},{n:"「まず結論」を意識する練習",h:"説明が長くなりがちなので「結論は〇〇です。説明しますね」と最初に一言言う癖をつける"}]}}
 };
 
+var GAS_URL="https://script.google.com/macros/s/AKfycbx3ow7HGZL-_fiWPfJwbO179k7aOFmZHTlshIPS2GfxZeDbBDfHHfVyAVcfPt1WhxSQ/exec";
 var prioColors=["#378ADD","#1D9E75","#EF9F27"];
 var prioLabels=["優先領域","次の領域","さらに伸ばす"];
 var prioCls=["p1","p2","p3"];
@@ -363,6 +391,67 @@ function showResult(){
   document.getElementById('screen-skills').classList.remove('active');
   document.getElementById('screen-result').classList.add('active');
   window.scrollTo(0,0);
+}
+
+
+function sendResult(){
+  var name=document.getElementById('sender-name').value.trim();
+  var btn=document.getElementById('send-btn');
+  var resultEl=document.getElementById('send-result');
+
+  if(!name){
+    resultEl.style.display='block';
+    resultEl.className='send-result ng';
+    resultEl.textContent='お名前を入力してください';
+    return;
+  }
+
+  var s={A:0,B:0,C:0,V:0,Au:0,La:0};
+  ['q1','q2','q3','q4','q5'].forEach(function(q){
+    var el=document.querySelector('input[name="'+q+'"]:checked');
+    if(el) s[el.value]++;
+  });
+  ['q6','q7','q8','q9','q10','q11'].forEach(function(q){
+    var el=document.querySelector('input[name="'+q+'"]:checked');
+    if(el) s[el.value]++;
+  });
+
+  btn.textContent='送信中...';
+  btn.classList.add('sending');
+  btn.disabled=true;
+  resultEl.style.display='none';
+
+  var payload={
+    name: name,
+    type: currentType,
+    stressA: s.A,
+    stressB: s.B,
+    stressC: s.C,
+    senseV: s.V,
+    senseAu: s.Au,
+    senseLa: s.La
+  };
+
+  fetch(GAS_URL, {
+    method: 'POST',
+    mode: 'no-cors',
+    headers: {'Content-Type': 'application/json'},
+    body: JSON.stringify(payload)
+  }).then(function(){
+    btn.textContent='送信済み ✓';
+    btn.style.background='#0F6E56';
+    btn.disabled=true;
+    resultEl.style.display='block';
+    resultEl.className='send-result ok';
+    resultEl.textContent='送信が完了しました。吉田さんに届きました！';
+  }).catch(function(err){
+    btn.textContent='結果を送信する';
+    btn.classList.remove('sending');
+    btn.disabled=false;
+    resultEl.style.display='block';
+    resultEl.className='send-result ng';
+    resultEl.textContent='送信に失敗しました。もう一度お試しください。';
+  });
 }
 
 function retryDiagnosis(){
