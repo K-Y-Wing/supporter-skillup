@@ -547,7 +547,6 @@ function showResult(){
 }
 
 function showSkillList(){
-  buildSkillPanels();
   document.getElementById('skills-type-label').textContent = 'あなたのタイプ：' + currentType;
 
   // 自分のタイプのタブをアクティブに
@@ -579,10 +578,7 @@ function showResult2(){
   window.scrollTo(0,0);
 }
 
-let panelsBuilt = false;
 function buildSkillPanels(){
-  if(panelsBuilt) return;
-  panelsBuilt = true;
 
   const tabContainer = document.getElementById('tabs');
   const panelContainer = document.getElementById('panels');
@@ -643,6 +639,8 @@ function toggleCheck(id, ti, area, name, how){
   else { checked[ti]=checked[ti].filter(s=>s.name!==name); }
   document.getElementById('count-'+ti).textContent='チェックしたスキル：'+checked[ti].length+'件';
 }
+
+document.addEventListener('DOMContentLoaded', function(){ buildSkillPanels(); });
 
 function copyChecked(ti, typeKey){
   const list = checked[ti]||[];
