@@ -87,7 +87,7 @@ h1{font-size:18px;font-weight:500;margin-bottom:4px;}
 <body>
 
 <div class="screen active" id="screen-diagnosis">
-  <div class="header"><h1>サポーター自己発見シート</h1><p class="subtitle">知っているようで、言葉にできなかった自分に出会う</p><p style="font-size:11px;color:#b0aea6;margin-top:4px;">11問に答えて、あなたの教え方タイプを知りましょう</p></div>
+  <div class="header"><h1>サポーター自己発見シート</h1><p class="subtitle">知っているようで、言葉にできなかった自分に出会う</p><p style="font-size:12px;color:#b0aea6;margin-top:2px;">自分に合った関わり方と次の一歩を見つける</p><p style="font-size:11px;color:#b0aea6;margin-top:4px;">11問に答えて、あなたの教え方タイプを知りましょう</p></div>
   <p class="axis-label">ストレス反応（困ったとき、どう動く？） Q1〜5</p>
   <div class="q-block" id="qb1"><div class="q-num">Q1</div><div class="q-text">受講生が同じ操作を何度やっても覚えられないとき、あなたはまず…</div><div class="options">
     <label class="opt-label"><input type="radio" name="q1" value="A"> 別のやり方や例えを使って、すぐに説明を変えてみる</label>
@@ -149,7 +149,7 @@ h1{font-size:18px;font-weight:500;margin-bottom:4px;}
 </div>
 
 <div class="screen" id="screen-result">
-  <div class="header"><h1>サポーター自己発見シート　診断結果</h1><p class="subtitle">あなたの教え方タイプが見つかりました</p></div>
+  <div class="header"><h1>サポーター自己発見シート　診断結果</h1><p class="subtitle">今の回答から見えた、あなたの傾向です</p></div>
   <div id="result-content"></div>
   <button class="next-btn" onclick="showSkillList()">スキルアップリストを見る →</button>
 
@@ -196,6 +196,17 @@ var skillsData={
   "マイペース型×言語優位":{order:["スマホ機能","対人スキル","教えるスキル"],skills:{"スマホ機能":[{n:"設定・セキュリティ系の知識を深める",h:"パスワード管理・二段階認証・Wi-Fi設定など、受講生からよく聞かれる設定系を自分で整理する"},{n:"機種別の違いを一覧表にまとめる",h:"Android/iPhoneの操作の違いを自分でまとめた一覧表を作り、教室で使えるようにする"},{n:"メモ・スケジュールアプリを使いこなす",h:"カレンダー・メモ帳・リマインダーの連携を自分で使い込んで整理する"}],"対人スキル":[{n:"「間」を強みとして使う",h:"じっくり考えてから話す自分のスタイルを「丁寧さ」として受講生に伝わるよう意識する"},{n:"言葉で関係を育てる",h:"毎回教室の最初に「前回のあれ、うまくいきましたか？」と前回の話を一言拾う"}],"教えるスキル":[{n:"自作ハンドアウトを1枚作る",h:"よく教える操作を自分の言葉で書いた手順書を1枚作り、受講生に渡せるようにする"},{n:"「まず結論」を意識する練習",h:"説明が長くなりがちなので「結論は〇〇です。説明しますね」と最初に一言言う癖をつける"}]}}
 };
 
+var safetyData={
+  "前進型×視覚優位":{phrase:"先生に確認しますね",toomuch:"受講生のスマホをすぐ触らず、10秒待つ",mission:"3ステップ説明のあとに「ここまで大丈夫ですか？」を1回入れる"},
+  "前進型×聴覚優位":{phrase:"先生に声をかけてみましょう",toomuch:"テンポよく説明しすぎない。受講生の返事を最後まで待つ",mission:"説明のあとに「声に出して繰り返してみてください」を1回入れる"},
+  "前進型×言語優位":{phrase:"今の困りごとを「一言で整理しますね」",toomuch:"説明が長くなったら「まず一つだけやってみましょう」で切る",mission:"説明を3文以内に収める練習1場面でやってみる"},
+  "安心重視型×視覚優位":{phrase:"ここを一緒に見てみましょう",toomuch:"画面を指さしたまま待ちすぎず「受講生に触ってもらう",mission:"「やってみてください」と言って１０秒手を出さずに見守る"},
+  "安心重視型×聴覚優位":{phrase:"一緒に確認しましょう",toomuch:"相手を安心させる言葉だけで終わらず「次の操作を1つ決める",mission:"「今どこで止まりましたか？」を1回聴く"},
+  "安心重視型×言語優位":{phrase:"つまりこういうことですね「先生に確認します」",toomuch:"丁寧に整理しすぎて「講座の流れから遅れないようにする",mission:"「つまり～ですね」の一言まとめを1場面で使ってみる"},
+  "マイペース型×視覚優位":{phrase:"画面を一緒に確認しますね",toomuch:"観察しすぎず、2分たったら声をかける",mission:"1分見ても分からなければ「先生に確認しますね」と言う"},
+  "マイペース型×聴覚優位":{phrase:"もう少し聴かせてください「先生に伝えます」",toomuch:"聴きすぎて時間が経ちすぎないよう、3分で講師につなぐ",mission:"「今どこを見ていますか？」を1回声に出して使う"},
+  "マイペース型×言語優位":{phrase:"少し整理して「先生に伝えますね」",toomuch:"考え込みすぎず、1分で講師につなぐ",mission:"困りごとを一文でメモして講師に渡す"}
+};
 var GAS_URL="https://script.google.com/macros/s/AKfycbx3ow7HGZL-_fiWPfJwbO179k7aOFmZHTlshIPS2GfxZeDbBDfHHfVyAVcfPt1WhxSQ/exec";
 var prioColors=["#378ADD","#1D9E75","#EF9F27"];
 var prioLabels=["優先領域","次の領域","さらに伸ばす"];
